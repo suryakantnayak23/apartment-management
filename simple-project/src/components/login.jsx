@@ -144,7 +144,7 @@ const LoginPage = () => {
                         {/* Copyright Section */}
                         <div className="text-center">
                             <small className="text-muted">
-                                Copyright © 2024 Junction. All rights reserved.
+                                Copyright © 2024 suryakant. All rights reserved.
                             </small>
                         </div>
                     </div>

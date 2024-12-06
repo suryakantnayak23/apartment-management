@@ -45,7 +45,7 @@ const DashBoardView = () => {
                         <DropdownToggle color="transparent">
                             <div className="d-flex align-items-center">
                                 <img src={logo} alt="profile" className="rounded-circle me-2" width="32" height="32" />
-                                <span className="d-none d-md-block">Sushree M</span>
+                                <span className="d-none d-md-block">Suryakant</span>
                             </div>
                         </DropdownToggle>
                         <DropdownMenu end>
