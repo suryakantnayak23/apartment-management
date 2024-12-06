@@ -183,7 +183,7 @@
                                 </div>
                                 <div className="text-center mt-4">
                                     <img src={user} alt="profile" className="rounded-circle" width="64" height="64" />
-                                    <h6 className="mt-3 mb-1">Sushree M</h6>
+                                    <h6 className="mt-3 mb-1">suryakant</h6>
                                     <p className="text-muted mb-1">Admin</p>
                                     <p className="mb-0">9348326648</p>
                                 </div>
@@ -217,7 +217,7 @@
                             <DropdownToggle color="transparent">
                                 <div className="d-flex align-items-center">
                                     <img src={user} alt="profile" className="rounded-circle me-2" width="32" height="32" />
-                                    <span className="d-none d-md-block">Sushree M</span>
+                                    <span className="d-none d-md-block">Suryakant</span>
                                 </div>
                             </DropdownToggle>
                             <DropdownMenu end>
