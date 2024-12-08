@@ -112,7 +112,7 @@
 
 .brand-logo {
   height: 40px;
-  margin-right: 1rem;
+  margin-right: 10px;
 }
 
 @media (max-width: 992px) {
@@ -120,5 +120,54 @@
     margin-left: 0;
   }
 }
+.sidebar-toggle {
+  transition: transform 0.3s ease; /* Smooth movement */
+  /* Adjust this value as needed to move the button further */
+}
+.sidebar-toggle.move-right {
+  transform: translateX(120px); /* Move 300px to the right */
+
+}
 //new
 // Existing styles...
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  position: fixed; /* Stay in place during loading */
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: Semi-transparent background */
+  z-index: 9999; /* Ensure it is above other elements */
+}
+
+.loading-spinner {
+  width: 100px; /* Adjust size of the loader */
+  height: 100px;
+}
+
+@keyframes bell-ring {
+  0% {
+    transform: rotate(0deg); /* Start at the center */
+  }
+  25% {
+    transform: rotate(15deg); /* Swing to the right */
+  }
+  50% {
+    transform: rotate(0deg); /* Return to the center */
+  }
+  75% {
+    transform: rotate(-15deg); /* Swing to the left */
+  }
+  100% {
+    transform: rotate(0deg); /* Return to the center */
+  }
+}
+
+.position-relative .text-muted {
+  display: inline-block; /* Ensure proper animation behavior */
+  animation: bell-ring 1s ease-in-out infinite; /* Adjust duration and easing */
+  transform-origin: top center; /* Pivot point for the rotation */
+}
