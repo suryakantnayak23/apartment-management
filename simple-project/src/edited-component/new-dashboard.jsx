@@ -205,7 +205,7 @@ const DashBoardView = () => {
                                 <img src={user} alt="profile" className="rounded-circle" width="64" height="64" />
                                 <h6 className="mt-3 mb-1">suryakant</h6>
                                 <p className="text-muted mb-1">Admin</p>
-                                <p className="mb-0">9348326648</p>
+                                <p className="mb-0">8917686309</p>
                             </div>
                         </CardBody>
                     </Card>
