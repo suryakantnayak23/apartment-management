@@ -5,7 +5,7 @@ import {
     FaCog, FaFileInvoice, FaWallet, FaBox, FaParking,
     FaLayerGroup, FaDoorOpen, FaArrowUp, FaChevronDown, FaChevronRight, FaArrowRight
 } from "react-icons/fa";
-import user from '../assets/user.png'
+import user from '../assets/user.png';
 import "../assets/dashboardSCSS.scss";
 import {
     Button,
@@ -21,14 +21,13 @@ import {
 } from "reactstrap";
 import { Menu } from "react-feather";
 import logo from "../assets/Home-Apartment-Building-by-logoroma.png";
-import { isMobile } from "react-device-detect";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import img from "../assets/profile-img.png";
 import UserTable from "../components/user-table";
-import HouseTable from "../components/house-table.jsx";
-import TodayVisitor from "../components/today-visitors.jsx";
-import ApprovalPending from "../components/aproval-pending.jsx";
+import HouseTable from "../components/house-table";
+import TodayVisitor from "../components/today-visitors";
+import ApprovalPending from "../components/aproval-pending";
 import loader from '../assets/loader.svg';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -40,24 +39,20 @@ const Loading = () => (
 );
 
 const DashBoardView = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
     const [isApartmentSetupOpen, setIsApartmentSetupOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const chartRef = useRef(null);
     const location = useLocation();
-    const [isMoved, setIsMoved] = useState(false);
-
-
 
     const toggleSidebar = () => {
-        setIsCollapsed(!isCollapsed);
+        setIsExpanded(!isExpanded);
     };
 
     const toggleApartmentSetup = () => {
         setIsApartmentSetupOpen(!isApartmentSetupOpen);
     };
 
-    // Chart data
     const chartData = {
         labels: ['August-2024', 'September-2024'],
         datasets: [
@@ -91,7 +86,7 @@ const DashBoardView = () => {
         setIsLoading(true);
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 1000); // Simulating a 1-second loading time
+        }, 1000);
 
         return () => {
             clearTimeout(timer);
@@ -186,12 +181,10 @@ const DashBoardView = () => {
                     <Card className="bg-primary bg-opacity-10">
                         <CardBody>
                             <div className="row align-items-center">
-                                {/* Text Section */}
                                 <div className="col-7">
                                     <h5>Welcome Back!</h5>
                                     <p className="text-muted">Dream House</p>
                                 </div>
-                                {/* Image Section */}
                                 <div className="col-5 text-end">
                                     <img
                                         src={img}
@@ -205,7 +198,7 @@ const DashBoardView = () => {
                                 <img src={user} alt="profile" className="rounded-circle" width="64" height="64" />
                                 <h6 className="mt-3 mb-1">suryakant</h6>
                                 <p className="text-muted mb-1">Admin</p>
-                                <p className="mb-0">9348326648</p>
+                                <p className="mb-0">8917686309</p>
                             </div>
                         </CardBody>
                     </Card>
@@ -217,23 +210,21 @@ const DashBoardView = () => {
     return (
         <div className="dashboard-container">
             {/* Top Navigation Bar */}
-            <Navbar color="white" light expand="lg" className="topbar shadow-sm fixed-top">
+            <Navbar color="white" light expand="lg" className="topbar shadow-sm">
                 <div className="d-flex align-items-center">
                     <img src={logo} alt="OhhPro" className="brand-logo" />
+
+                    {isExpanded && (
+                        <span className="company-name me-3">
+                            Suryakant.co
+                        </span>
+                    )}
                     <Button
-                        className={`border-0 sidebar-toggle ${isCollapsed ? "move-right" : ""}`}
+                        className="sidebar-toggle"
                         onClick={toggleSidebar}
-                        style={{ marginLeft: '20px' }}
                     >
                         <Menu size={20} />
                     </Button>
-                    {isCollapsed && (
-                        <span style={{ marginLeft: "calc(-1 * 50px)"
-                            , fontSize: "16px", fontWeight: "bold", color: "#5A5AE6",
-                            textShadow: "1px 1px 3px rgba(0, 0, 0, 0.5)", }}>
-                    Suryakant.co
-                </span>
-                    )}
                 </div>
 
                 <div className="ms-auto d-flex align-items-center">
@@ -260,66 +251,73 @@ const DashBoardView = () => {
             </Navbar>
 
             {/* Sidebar */}
-            <div className={`sidebar bg-dark ${isCollapsed ? 'expanded' : ''}`} style={{ height: '100vh', overflowY: 'auto', top: '0', position: 'fixed' }}>
-                <Nav vertical className="flex-column pt-[56px]">
+            <div className={`sidebar ${isExpanded ? 'expanded' : ''}`}>
+                <Nav vertical className="flex-column">
                     <div className="sidebar-items">
                         <Link to="/dashboard" className="sidebar-item active">
-                            <FaChartBar /> <span>Dashboards</span>
-                            <span className="badge bg-success rounded-pill ms-2">NEW</span>
+                            <FaChartBar />
+                            <span>Dashboards</span>
+                            {isExpanded && <span className="badge bg-success rounded-pill ms-2">NEW</span>}
                         </Link>
 
-                        {/* Apartment Setup with Submenu */}
                         <div className="sidebar-submenu">
                             <div className="sidebar-item" onClick={toggleApartmentSetup}>
                                 <FaBuilding />
                                 <span>Apartment Setup</span>
-                                {isApartmentSetupOpen ? <FaChevronDown className="ms-auto" /> : <FaChevronRight className="ms-auto" />}
+                                {isExpanded && (isApartmentSetupOpen ? <FaChevronDown className="ms-auto" /> : <FaChevronRight className="ms-auto" />)}
                             </div>
-                            <div className={`submenu ${isApartmentSetupOpen ? 'show' : ''}`}>
-                                {isApartmentSetupOpen && (
-                                    <>
-                                        <Link to="/block" className="sidebar-item">
-                                            <FaLayerGroup /> <span>Block</span>
-                                        </Link>
-                                        <Link to="/floor" className="sidebar-item">
-                                            <FaLayerGroup /> <span>Floor</span>
-                                        </Link>
-                                        <Link to="/dashboard/housetable" className="sidebar-item">
-                                            <FaDoorOpen /> <span>House</span>
-                                        </Link>
-                                        <Link to="/lift" className="sidebar-item">
-                                            <FaArrowUp /> <span>Lift</span>
-                                        </Link>
-                                        <Link to="/parking" className="sidebar-item">
-                                            <FaParking /> <span>Parking</span>
-                                        </Link>
-                                    </>
-                                )}
-                            </div>
+                            {isApartmentSetupOpen && isExpanded && (
+                                <div className="submenu">
+                                    <Link to="/block" className="sidebar-item">
+                                        <FaLayerGroup />
+                                        <span>Block</span>
+                                    </Link>
+                                    <Link to="/floor" className="sidebar-item">
+                                        <FaLayerGroup />
+                                        <span>Floor</span>
+                                    </Link>
+                                    <Link to="/dashboard/housetable" className="sidebar-item">
+                                        <FaDoorOpen />
+                                        <span>House</span>
+                                    </Link>
+                                    <Link to="/lift" className="sidebar-item">
+                                        <FaArrowUp />
+                                        <span>Lift</span>
+                                    </Link>
+                                    <Link to="/parking" className="sidebar-item">
+                                        <FaParking />
+                                        <span>Parking</span>
+                                    </Link>
+                                </div>
+                            )}
                         </div>
 
                         <Link to="/complaints" className="sidebar-item">
-                            <FaFileInvoice /> <span>Complain Management</span>
+                            <FaFileInvoice />
+                            <span>Complain Management</span>
                         </Link>
                         <Link to="/daily-help" className="sidebar-item">
-                            <FaUser /> <span>Daily Help</span>
+                            <FaUser />
+                            <span>Daily Help</span>
                         </Link>
 
                         <div className="sidebar-category">FINANCIAL TRANSACTION</div>
 
                         <Link to="/assets" className="sidebar-item">
-                            <FaBox /> <span>Asset & Amenity</span>
-                            <span className="badge bg-success rounded-pill ms-2">NEW</span>
+                            <FaBox />
+                            <span>Asset & Amenity</span>
+                            {isExpanded && <span className="badge bg-success rounded-pill ms-2">NEW</span>}
                         </Link>
                         <Link to="/bank" className="sidebar-item">
-                            <FaWallet /> <span>Apartment Bank Account</span>
+                            <FaWallet />
+                            <span>Apartment Bank Account</span>
                         </Link>
                     </div>
                 </Nav>
             </div>
 
             {/* Main Content */}
-            <div className={`main-content ${isCollapsed ? 'shifted' : ''}`} style={{ paddingTop: '56px' }}>
+            <div className={`main-content ${isExpanded ? 'shifted' : ''}`}>
                 {isLoading ? (
                     <Loading />
                 ) : (
